@@ -42,17 +42,41 @@ function startup_reloaded_team() {
 		'has_archive'         => true,
 		'exclude_from_search' => true,
 		'publicly_queryable'  => true,
-		'capability_type'     => 'page'
+        'capability_type'     => array('team_member','team_members'),
+        'map_meta_cap'        => true
 	);
 	register_post_type( 'team', $args );
 
 }
 add_action( 'init', 'startup_reloaded_team', 0 );
 
-// Metaboxes
-add_action( 'cmb2_init', 'startup_reloaded_metabox_team' );
+// Capabilities
 
-function startup_reloaded_metabox_team() {
+register_activation_hook( __FILE__, 'startup_reloaded_team_caps' );
+
+function startup_reloaded_team_caps() {
+	
+	$role_admin = get_role( 'administrator' );
+	
+	$role_admin->add_cap( 'edit_team_member' );
+	$role_admin->add_cap( 'read_team_member' );
+	$role_admin->add_cap( 'delete_team_member' );
+	$role_admin->add_cap( 'edit_others_team_members' );
+	$role_admin->add_cap( 'publish_team_members' );
+	$role_admin->add_cap( 'edit_team_members' );
+	$role_admin->add_cap( 'read_private_team_members' );
+	$role_admin->add_cap( 'delete_team_members' );
+	$role_admin->add_cap( 'delete_private_team_members' );
+	$role_admin->add_cap( 'delete_published_team_members' );
+	$role_admin->add_cap( 'delete_others_team_members' );
+	$role_admin->add_cap( 'edit_private_team_members' );
+	$role_admin->add_cap( 'edit_published_team_members' );
+}
+
+// Metaboxes
+add_action( 'cmb2_init', 'startup_reloaded_team_meta' );
+
+function startup_reloaded_team_meta() {
     require get_template_directory() . '/inc/font-awesome.php';
     
 	// Start with an underscore to hide fields from custom fields list
