@@ -8,7 +8,6 @@ Version: 1.0
 
 //CPT
 function startup_reloaded_team() {
-
 	$labels = array(
 		'name'                => _x( 'Team members', 'Post Type General Name', 'text_domain' ),
 		'singular_name'       => _x( 'Team member', 'Post Type Singular Name', 'text_domain' ),
@@ -46,18 +45,13 @@ function startup_reloaded_team() {
         'map_meta_cap'        => true
 	);
 	register_post_type( 'team', $args );
-
 }
+
 add_action( 'init', 'startup_reloaded_team', 0 );
 
 // Capabilities
-
-register_activation_hook( __FILE__, 'startup_reloaded_team_caps' );
-
 function startup_reloaded_team_caps() {
-	
 	$role_admin = get_role( 'administrator' );
-	
 	$role_admin->add_cap( 'edit_team_member' );
 	$role_admin->add_cap( 'read_team_member' );
 	$role_admin->add_cap( 'delete_team_member' );
@@ -73,9 +67,9 @@ function startup_reloaded_team_caps() {
 	$role_admin->add_cap( 'edit_published_team_members' );
 }
 
-// Metaboxes
-add_action( 'cmb2_init', 'startup_reloaded_team_meta' );
+register_activation_hook( __FILE__, 'startup_reloaded_team_caps' );
 
+// Metaboxes
 function startup_reloaded_team_meta() {
     require get_template_directory() . '/inc/font-awesome.php';
     
@@ -150,4 +144,6 @@ function startup_reloaded_team_meta() {
 		'type'       => 'text'
 	) );
 }
+
+add_action( 'cmb2_init', 'startup_reloaded_team_meta' );
 ?>
