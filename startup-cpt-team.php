@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: StartUp Team Custom Post
+Plugin Name: StartUp Team Custom Post Type
 Description: Le plugin pour activer le Custom Post Team
 Author: Yann Caplain
-Version: 1.0.0
+Version: 1.1.0
 */
 
 //CPT
