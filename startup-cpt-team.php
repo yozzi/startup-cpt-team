@@ -178,4 +178,11 @@ function startup_reloaded_team_meta() {
 }
 
 add_action( 'cmb2_init', 'startup_reloaded_team_meta' );
+
+// Shortcode
+add_shortcode( 'team', function( $atts, $content= null ){
+    ob_start();
+    require get_template_directory() . '/inc/shortcodes/team.php';
+    return ob_get_clean();
+});
 ?>
