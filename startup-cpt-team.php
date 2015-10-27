@@ -73,7 +73,7 @@ function startup_reloaded_team() {
 
 add_action( 'init', 'startup_reloaded_team', 0 );
 
-//Flusher les permalink à l'activation du plgin pour qu'ils fonctionnent sans mise à jour manuelle
+//Flusher les permalink à l'activation du plugin pour qu'ils fonctionnent sans mise à jour manuelle
 function startup_reloaded_team_rewrite_flush() {
     startup_reloaded_team();
     flush_rewrite_rules();
