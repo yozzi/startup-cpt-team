@@ -177,7 +177,7 @@ function startup_reloaded_team_meta() {
 	) );
 }
 
-add_action( 'cmb2_init', 'startup_reloaded_team_meta' );
+add_action( 'cmb2_admin_init', 'startup_reloaded_team_meta' );
 
 // Shortcode
 add_shortcode( 'team', function( $atts, $content= null ){
