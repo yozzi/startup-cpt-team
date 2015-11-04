@@ -105,23 +105,23 @@ register_activation_hook( __FILE__, 'startup_reloaded_team_caps' );
 // Team taxonomy
 function startup_reloaded_team_categories() {
 	$labels = array(
-		'name'                       => _x( 'Team Categories', 'Taxonomy General Name', 'startup-reloaded-cpt-team' ),
-		'singular_name'              => _x( 'Team Category', 'Taxonomy Singular Name', 'startup-reloaded-cpt-team' ),
-		'menu_name'                  => __( 'Team Categories', 'startup-reloaded-cpt-team' ),
-		'all_items'                  => __( 'All Items', 'startup-reloaded-cpt-team' ),
-		'parent_item'                => __( 'Parent Item', 'startup-reloaded-cpt-team' ),
-		'parent_item_colon'          => __( 'Parent Item:', 'startup-reloaded-cpt-team' ),
-		'new_item_name'              => __( 'New Item Name', 'startup-reloaded-cpt-team' ),
-		'add_new_item'               => __( 'Add New Item', 'startup-reloaded-cpt-team' ),
-		'edit_item'                  => __( 'Edit Item', 'startup-reloaded-cpt-team' ),
-		'update_item'                => __( 'Update Item', 'startup-reloaded-cpt-team' ),
-		'view_item'                  => __( 'View Item', 'startup-reloaded-cpt-team' ),
-		'separate_items_with_commas' => __( 'Separate items with commas', 'startup-reloaded-cpt-team' ),
-		'add_or_remove_items'        => __( 'Add or remove items', 'startup-reloaded-cpt-team' ),
-		'choose_from_most_used'      => __( 'Choose from the most used', 'startup-reloaded-cpt-team' ),
-		'popular_items'              => __( 'Popular Items', 'startup-reloaded-cpt-team' ),
-		'search_items'               => __( 'Search Items', 'startup-reloaded-cpt-team' ),
-		'not_found'                  => __( 'Not Found', 'startup-reloaded-cpt-team' )
+		'name'                       => _x( 'Team Categories', 'Taxonomy General Name', 'startup-cpt-team' ),
+		'singular_name'              => _x( 'Team Category', 'Taxonomy Singular Name', 'startup-cpt-team' ),
+		'menu_name'                  => __( 'Team Categories', 'startup-cpt-team' ),
+		'all_items'                  => __( 'All Items', 'startup-cpt-team' ),
+		'parent_item'                => __( 'Parent Item', 'startup-cpt-team' ),
+		'parent_item_colon'          => __( 'Parent Item:', 'startup-cpt-team' ),
+		'new_item_name'              => __( 'New Item Name', 'startup-cpt-team' ),
+		'add_new_item'               => __( 'Add New Item', 'startup-cpt-team' ),
+		'edit_item'                  => __( 'Edit Item', 'startup-cpt-team' ),
+		'update_item'                => __( 'Update Item', 'startup-cpt-team' ),
+		'view_item'                  => __( 'View Item', 'startup-cpt-team' ),
+		'separate_items_with_commas' => __( 'Separate items with commas', 'startup-cpt-team' ),
+		'add_or_remove_items'        => __( 'Add or remove items', 'startup-cpt-team' ),
+		'choose_from_most_used'      => __( 'Choose from the most used', 'startup-cpt-team' ),
+		'popular_items'              => __( 'Popular Items', 'startup-cpt-team' ),
+		'search_items'               => __( 'Search Items', 'startup-cpt-team' ),
+		'not_found'                  => __( 'Not Found', 'startup-cpt-team' )
 	);
 	$args = array(
 		'labels'                     => $labels,
@@ -156,13 +156,13 @@ function startup_reloaded_team_meta() {
 
 	$cmb_box = new_cmb2_box( array(
 		'id'            => $prefix . 'metabox',
-		'title'         => __( 'Team member details', 'startup-reloaded-cpt-team' ),
+		'title'         => __( 'Team member details', 'startup-cpt-team' ),
 		'object_types'  => array( 'team' )
 	) );
     
     $cmb_box->add_field( array(
-		'name'     => __( 'Categoy', 'startup-reloaded-cpt-team' ),
-		'desc'     => __( 'Select the category(ies) of the team member', 'startup-reloaded-cpt-team' ),
+		'name'     => __( 'Categoy', 'startup-cpt-team' ),
+		'desc'     => __( 'Select the category(ies) of the team member', 'startup-cpt-team' ),
 		'id'       => $prefix . 'category',
 		'type'     => 'taxonomy_multicheck',
 		'taxonomy' => 'team-category', // Taxonomy Slug
@@ -170,13 +170,13 @@ function startup_reloaded_team_meta() {
 	) );
     
     $cmb_box->add_field( array(
-		'name'       => __( 'Capacity', 'startup-reloaded-cpt-team' ),
+		'name'       => __( 'Capacity', 'startup-cpt-team' ),
 		'id'         => $prefix . 'capacity',
 		'type'       => 'text'
 	) );
     
     $cmb_box->add_field( array(
-        'name'             => __( 'Social icon 1', 'startup-reloaded-cpt-team' ),
+        'name'             => __( 'Social icon 1', 'startup-cpt-team' ),
         'id'               => $prefix . 'icon_1',
         'type'             => 'select',
         'show_option_none' => true,
@@ -184,13 +184,13 @@ function startup_reloaded_team_meta() {
     ) );
 
     $cmb_box->add_field( array(
-		'name'       => __( 'Social link 1', 'startup-reloaded-cpt-team' ),
+		'name'       => __( 'Social link 1', 'startup-cpt-team' ),
 		'id'         => $prefix . 'link_1',
 		'type'       => 'text'
 	) );
     
     $cmb_box->add_field( array(
-        'name'             => __( 'Social icon 2', 'startup-reloaded-cpt-team' ),
+        'name'             => __( 'Social icon 2', 'startup-cpt-team' ),
         'id'               => $prefix . 'icon_2',
         'type'             => 'select',
         'show_option_none' => true,
@@ -198,13 +198,13 @@ function startup_reloaded_team_meta() {
     ) );
 
     $cmb_box->add_field( array(
-		'name'       => __( 'Social link 2', 'startup-reloaded-cpt-team' ),
+		'name'       => __( 'Social link 2', 'startup-cpt-team' ),
 		'id'         => $prefix . 'link_2',
 		'type'       => 'text'
 	) );
     
     $cmb_box->add_field( array(
-        'name'             => __( 'Social icon 3', 'startup-reloaded-cpt-team' ),
+        'name'             => __( 'Social icon 3', 'startup-cpt-team' ),
         'id'               => $prefix . 'icon_3',
         'type'             => 'select',
         'show_option_none' => true,
@@ -212,13 +212,13 @@ function startup_reloaded_team_meta() {
     ) );
 
     $cmb_box->add_field( array(
-		'name'       => __( 'Social link 3', 'startup-reloaded-cpt-team' ),
+		'name'       => __( 'Social link 3', 'startup-cpt-team' ),
 		'id'         => $prefix . 'link_3',
 		'type'       => 'text'
 	) );
     
     $cmb_box->add_field( array(
-        'name'             => __( 'Social icon 4', 'startup-reloaded-cpt-team' ),
+        'name'             => __( 'Social icon 4', 'startup-cpt-team' ),
         'id'               => $prefix . 'icon_4',
         'type'             => 'select',
         'show_option_none' => true,
@@ -226,7 +226,7 @@ function startup_reloaded_team_meta() {
     ) );
 
     $cmb_box->add_field( array(
-		'name'       => __( 'Social link 4', 'startup-reloaded-cpt-team' ),
+		'name'       => __( 'Social link 4', 'startup-cpt-team' ),
 		'id'         => $prefix . 'link_4',
 		'type'       => 'text'
 	) );
@@ -245,7 +245,7 @@ function startup_reloaded_team_meta() {
 	}
     
     $cmb_box->add_field( array(
-        'name'             => __( 'Profile page', 'startup-reloaded-cpt-team' ),
+        'name'             => __( 'Profile page', 'startup-cpt-team' ),
         'id'               => $prefix . 'page',
         'type'             => 'select',
         'show_option_none' => true,
