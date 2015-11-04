@@ -182,7 +182,7 @@ add_action( 'cmb2_admin_init', 'startup_reloaded_team_meta' );
 // Shortcode
 add_shortcode( 'team', function( $atts, $content= null ){
     ob_start();
-    require get_template_directory() . '/inc/shortcodes/team.php';
+    require get_template_directory() . '/template-parts/content-team.php';
     return ob_get_clean();
 });
 ?>
