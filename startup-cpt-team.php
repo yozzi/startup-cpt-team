@@ -262,6 +262,7 @@ function startup_reloaded_team_shortcode( $atts ) {
 	// Attributes
     $atts = shortcode_atts(array(
             'bg' => '#f0f0f0',
+            'order' => '',
             'cat' => '',
             'id' => '',
         ), $atts);
