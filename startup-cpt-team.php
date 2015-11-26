@@ -246,7 +246,7 @@ function startup_reloaded_team_meta() {
 	$pages = array();
 	$pages_obj = get_pages( $args );
 	foreach ($pages_obj as $page) {
-		$pages[$page->post_name] = $page->post_title;
+		$pages[$page->ID] = $page->post_title;
 	}
     
     $cmb_box->add_field( array(
