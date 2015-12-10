@@ -13,7 +13,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 //GitHub Plugin Updater
-function startup_reloaded_team_updater() {
+function startup_cpt_team_updater() {
 	include_once 'lib/updater.php';
 	//define( 'WP_GITHUB_FORCE_UPDATE', true );
 	if ( is_admin() ) {
@@ -34,10 +34,10 @@ function startup_reloaded_team_updater() {
 	}
 }
 
-//add_action( 'init', 'startup_reloaded_team_updater' );
+//add_action( 'init', 'startup_cpt_team_updater' );
 
 //CPT
-function startup_reloaded_team() {
+function startup_cpt_team() {
 	$labels = array(
 		'name'                => _x( 'Team members', 'Post Type General Name', 'startup-cpt-team' ),
 		'singular_name'       => _x( 'Team member', 'Post Type Singular Name', 'startup-cpt-team' ),
@@ -77,18 +77,18 @@ function startup_reloaded_team() {
 	register_post_type( 'team', $args );
 }
 
-add_action( 'init', 'startup_reloaded_team', 0 );
+add_action( 'init', 'startup_cpt_team', 0 );
 
 //Flusher les permalink à l'activation du plugin pour qu'ils fonctionnent sans mise à jour manuelle
-function startup_reloaded_team_rewrite_flush() {
-    startup_reloaded_team();
+function startup_cpt_team_rewrite_flush() {
+    startup_cpt_team();
     flush_rewrite_rules();
 }
 
-register_activation_hook( __FILE__, 'startup_reloaded_team_rewrite_flush' );
+register_activation_hook( __FILE__, 'startup_cpt_team_rewrite_flush' );
 
 // Capabilities
-function startup_reloaded_team_caps() {
+function startup_cpt_team_caps() {
 	$role_admin = get_role( 'administrator' );
 	$role_admin->add_cap( 'edit_team_member' );
 	$role_admin->add_cap( 'read_team_member' );
@@ -105,10 +105,10 @@ function startup_reloaded_team_caps() {
 	$role_admin->add_cap( 'edit_published_team_members' );
 }
 
-register_activation_hook( __FILE__, 'startup_reloaded_team_caps' );
+register_activation_hook( __FILE__, 'startup_cpt_team_caps' );
 
 // Team taxonomy
-function startup_reloaded_team_categories() {
+function startup_cpt_team_categories() {
 	$labels = array(
 		'name'                       => _x( 'Team Categories', 'Taxonomy General Name', 'startup-cpt-team' ),
 		'singular_name'              => _x( 'Team Category', 'Taxonomy Singular Name', 'startup-cpt-team' ),
@@ -141,23 +141,23 @@ function startup_reloaded_team_categories() {
 
 }
 
-add_action( 'init', 'startup_reloaded_team_categories', 0 );
+add_action( 'init', 'startup_cpt_team_categories', 0 );
 
 // Retirer la boite de la taxonomie sur le coté
-function startup_reloaded_team_categories_metabox_remove() {
+function startup_cpt_team_categories_metabox_remove() {
 	remove_meta_box( 'tagsdiv-team-category', 'team', 'side' );
     // tagsdiv-product_types pour les taxonomies type tags
     // custom_taxonomy_slugdiv pour les taxonomies type categories
 }
 
-add_action( 'admin_menu' , 'startup_reloaded_team_categories_metabox_remove' );
+add_action( 'admin_menu' , 'startup_cpt_team_categories_metabox_remove' );
 
 // Metaboxes
-function startup_reloaded_team_meta() {
+function startup_cpt_team_meta() {
     require get_template_directory() . '/inc/font-awesome.php';
     
 	// Start with an underscore to hide fields from custom fields list
-	$prefix = '_startup_reloaded_team_';
+	$prefix = '_startup_cpt_team_';
 
 	$cmb_box = new_cmb2_box( array(
 		'id'            => $prefix . 'metabox',
@@ -259,10 +259,10 @@ function startup_reloaded_team_meta() {
 
 }
 
-add_action( 'cmb2_admin_init', 'startup_reloaded_team_meta' );
+add_action( 'cmb2_admin_init', 'startup_cpt_team_meta' );
 
 // Shortcode
-function startup_reloaded_team_shortcode( $atts ) {
+function startup_cpt_team_shortcode( $atts ) {
 
 	// Attributes
     $atts = shortcode_atts(array(
@@ -277,7 +277,70 @@ function startup_reloaded_team_shortcode( $atts ) {
         require get_template_directory() . '/template-parts/content-team.php';
         return ob_get_clean();    
 }
-add_shortcode( 'team', 'startup_reloaded_team_shortcode' );
+add_shortcode( 'team', 'startup_cpt_team_shortcode' );
+
+// Shortcode UI
+/**
+ * Detecion de Shortcake. Identique dans tous les plugins.
+ */
+if ( !function_exists( 'shortcode_ui_detection' ) ) {
+    function shortcode_ui_detection() {
+        if ( !function_exists( 'shortcode_ui_register_for_shortcode' ) ) {
+            add_action( 'admin_notices', 'shortcode_ui_notice' );
+        }
+    }
+
+    function shortcode_ui_notice() {
+        if ( current_user_can( 'activate_plugins' ) ) {
+            echo '<div class="error message"><p>Shortcode UI plugin must be active to use fast shortcodes.</p></div>';
+        }
+    }
+
+add_action( 'init', 'shortcode_ui_detection' );
+}
+
+function startup_cpt_team_shortcode_ui() {
+
+    shortcode_ui_register_for_shortcode(
+        'team',
+        array(
+            'label' => esc_html__( 'Team', 'startup-cpt-team' ),
+            'listItemImage' => 'dashicons-groups',
+            'attrs' => array(
+                array(
+                    'label' => esc_html__( 'Background', 'startup-cpt-team' ),
+                    'attr'  => 'bg',
+                    'type'  => 'color',
+                ),
+                array(
+                    'label' => esc_html__( 'Order', 'startup-cpt-team' ),
+                    'attr'  => 'order',
+                    'type' => 'select',
+                    'options' => array(
+                        'menu_order' => esc_html__( 'Menu Order', 'startup-cpt-team' ),
+                        'rand' => esc_html__( 'Random', 'startup-cpt-team' )
+                    ),
+                ),
+                array(
+                    'label' => esc_html__( 'Category', 'startup-cpt-team' ),
+                    'attr'  => 'cat',
+                    'type'  => 'text',
+                ),
+                array(
+                    'label' => esc_html__( 'ID', 'startup-cpt-team' ),
+                    'attr'  => 'id',
+					'type' => 'post_select',
+					'query' => array( 'post_type' => 'team' ),
+					'multiple' => false,
+                ),
+            ),
+        )
+    );
+};
+
+if ( function_exists( 'shortcode_ui_register_for_shortcode' ) ) {
+    add_action( 'init', 'startup_cpt_team_shortcode_ui');
+}
 
 // Enqueue scripts and styles.
 function startup_cpt_team_scripts() {
