@@ -370,5 +370,5 @@ function startup_cpt_team_scripts() {
     wp_enqueue_style( 'startup-cpt-team-style', plugins_url( '/css/startup-cpt-team.css', __FILE__ ), array( ), false, 'all' );
 }
 
-add_action( 'wp_enqueue_scripts', 'startup_cpt_team_scripts' );
+add_action( 'wp_enqueue_scripts', 'startup_cpt_team_scripts', 15 );
 ?>
