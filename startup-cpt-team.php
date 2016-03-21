@@ -177,7 +177,7 @@ if ( !function_exists( 'cmb2_detection' ) ) {
 }
 
 function startup_cpt_team_meta() {
-    require get_template_directory() . '/inc/font-awesome.php';
+    require ABSPATH . 'wp-content/plugins/startup-cpt-team/inc/font-awesome.php';
     
 	// Start with an underscore to hide fields from custom fields list
 	$prefix = '_startup_cpt_team_';
@@ -304,7 +304,7 @@ add_shortcode( 'team', 'startup_cpt_team_shortcode' );
 
 // Shortcode UI
 /**
- * Detecion de Shortcake. Identique dans tous les plugins.
+ * Detection de Shortcake. Identique dans tous les plugins.
  */
 if ( !function_exists( 'shortcode_ui_detection' ) ) {
     function shortcode_ui_detection() {
