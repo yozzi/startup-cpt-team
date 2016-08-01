@@ -173,7 +173,7 @@ function startup_cpt_team_meta() {
 	) );
     
     $cmb_box->add_field( array(
-		'name'     => __( 'Categoy', 'startup-cpt-team' ),
+		'name'     => __( 'Category', 'startup-cpt-team' ),
 		'desc'     => __( 'Select the category(ies) of the team member', 'startup-cpt-team' ),
 		'id'       => $prefix . 'category',
 		'type'     => 'taxonomy_multicheck',
